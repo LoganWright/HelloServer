@@ -45,11 +45,13 @@ struct Message: MappableObject {
     }
 }
 
+var messages: [Message] = []
+
 Route.post("messages") { request in
     let js = try Json.deserialize(request.body)
     let message = try Message(data: js)
     let serialized = try message.jsonRepresentation().serialize(.PrettyPrint)
-//    directory.writeData(serialized)
+    messages.append(message)
     return serialized
 }
 
@@ -64,7 +66,7 @@ Route.get("messages") { _ in
 //    var str = "[\n"
 //    str += messages
 //    str += "\n]"
-    return Response(status: .OK, text:  "Temporarily down :)")
+    return Response(status: .OK, text: try messages.jsonRepresentation().serialize(.PrettyPrint))
 }
 
 Route.get("complex") { request in
