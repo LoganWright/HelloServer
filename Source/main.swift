@@ -11,7 +11,7 @@ import Vapor
 import PureJsonSerializer
 import Genome
 
-let directory = DirectoryManager(directoryName: "database")
+//let directory = DirectoryManager(directoryName: "database")
 
 struct Message: MappableObject {
     let id: String
@@ -49,22 +49,22 @@ Route.post("messages") { request in
     let js = try Json.deserialize(request.body)
     let message = try Message(data: js)
     let serialized = try message.jsonRepresentation().serialize(.PrettyPrint)
-    directory.writeData(serialized)
+//    directory.writeData(serialized)
     return serialized
 }
 
 Route.get("messages") { _ in
-    let messages = directory
-        .allFilesInDirectory
-        .flatMap { fileName -> String? in
-            return directory.fetchFileWithName(fileName)
-        }
-        .joinWithSeparator(",\n")
-    
-    var str = "[\n"
-    str += messages
-    str += "\n]"
-    return Response(status: .OK, text:  str)
+//    let messages = directory
+//        .allFilesInDirectory
+//        .flatMap { fileName -> String? in
+//            return directory.fetchFileWithName(fileName)
+//        }
+//        .joinWithSeparator(",\n")
+//    
+//    var str = "[\n"
+//    str += messages
+//    str += "\n]"
+    return Response(status: .OK, text:  "Temporarily down :)")
 }
 
 Route.get("complex") { request in
