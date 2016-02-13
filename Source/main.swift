@@ -10,10 +10,6 @@ import Foundation
 import Vapor
 import PureJsonSerializer
 import Genome
-import CMySQL
-import MySQL
-
-"mysql://bf2b72dd22d56c:4f4bcfbc@us-cdbr-iron-east-03.cleardb.net/heroku_161e2f8af44fa34?reconnect=true"
 
 //let directory = DirectoryManager(directoryName: "database")
 
