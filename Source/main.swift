@@ -9,7 +9,7 @@
 import Foundation
 import Vapor
 
-Route.get("/") { request in
+Route.get("/complex") { request in
     let json = [
         [ "hello" : "world" ],
         [ "hello" : "mars" ]
