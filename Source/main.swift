@@ -21,27 +21,13 @@ Route.get("/hello") { request in
     return ["Hello" : "World"]
 }
 
-public let method: Vapor.Request.Method
-///Query data from the path, or POST data from the body (depends on `Method`).
-public let data: [String : String]
-///Browser stored data sent with every server request
-public let cookies: [String : String]
-///Path requested from server, not including hostname.
-public let path: String
-///Information or metadata about the `Request`.
-public let headers: [String : String]
-///Content of the `Request`.
-public let body: [UInt8]
-///Address from which the `Request` originated.
-public let address: String?
-///URL parameters (ex: `:id`).
-public var parameters: [String : String]
-///Server stored information related from session cookie.
-public var session: Vapor.Session
-
 Route.post("test") { request in
     print("Request: \(request)")
-    return "success"
+    let json = [
+        "hello",
+        "array"
+    ]
+    return try Response(status: Response.Status.OK, json: json)
 }
 
 extension Request: CustomStringConvertible {
