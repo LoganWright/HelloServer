@@ -67,7 +67,7 @@ Route.post("meme") { req in
             "text" : Json(url)
         ]
     ]
-    return js.serialize(.PrettyPrint)
+    return Response(status: .OK, text: js.serialize(.PrettyPrint))
 }
 var messages: [Message] = []
 
