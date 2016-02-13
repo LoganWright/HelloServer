@@ -11,7 +11,7 @@ import Vapor
 
 Route.get("/complex") { request in
     print("Making request: \(request)")
-    let json = [
+    let json: NSArray = [
         ["hello" : "world"],
         ["hello" : "mars"]
     ]
