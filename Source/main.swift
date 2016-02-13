@@ -51,12 +51,23 @@ let BottomToken = "-bottom"
 
 Route.post("meme") { req in
     print("\n\n ******* \n\n MEME RAN \n\n ******* \(req) ******** \n\n \n\n ******** \n\n")
-    let text = req.data["text"]?
+    var url = "http://urlme.me/"
+    url += req.data["text"]?
         .characters
         .split { $0 == "+" }
         .flatMap { String($0) }
-        
-    return "Got text: \n**\(text)**\n"
+        .split { cmd in [TopToken, BottomToken].contains(cmd) }
+        .map { comps in return comps.joinWithSeparator("%20") }
+        .joinWithSeparator("/") ?? "success/sent%20a%20bad%20command/still%20got%20response"
+ 
+    let js: Json = [
+        "response_type" : "in_channel",
+        "text" : "Here ya go!",
+        "attachments" : [
+            "text" : Json(url)
+        ]
+    ]
+    return js.serialize(.PrettyPrint)
 }
 var messages: [Message] = []
 
