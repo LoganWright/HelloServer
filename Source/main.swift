@@ -11,6 +11,32 @@ import Vapor
 import PureJsonSerializer
 import Genome
 
+// MARK: Request Extensions
+
+extension Request: CustomStringConvertible {
+    public var jsonBody: Json? {
+        return try? Json.deserialize(body)
+    }
+    
+    public var description: String {
+        var string = "\n"
+        
+        string += "\nMethod    : \(method)"
+        string += "\nData      : \(data)"
+        string += "\nCookies   : \(cookies)"
+        string += "\nPath      : \(path)"
+        string += "\nHeaders   : \(headers)"
+        string += "\nBody      : \(jsonBody)"
+        string += "\nAddress   : \(address)"
+        string += "\nParameters: \(parameters)"
+        string += "\nSession   : \(session)"
+        
+        return string + "\n"
+    }
+}
+
+
+
 struct Message: MappableObject {
     let id: String
     let message: String
@@ -41,13 +67,17 @@ var messages: [Message] = []
 Route.post("messages") { request in
     let js = try Json.deserialize(request.body)
     let message = try Message(data: js)
-    let serialized = try message.jsonRepresentation().serialize(.PrettyPrint)
+    let serialized = try message
+        .jsonRepresentation()
+        .serialize(.PrettyPrint)
     messages.append(message)
     return serialized
 }
 
 Route.get("messages") { _ in
-    let messagesString = try messages.jsonRepresentation().serialize(.PrettyPrint)
+    let messagesString = try messages
+        .jsonRepresentation()
+        .serialize(.PrettyPrint)
     return Response(status: .OK, text: messagesString)
 }
 
@@ -62,27 +92,3 @@ Route.get("hello/:name") { request in
 
 let server = Server()
 server.run(port: 8080)
-
-// MARK: Request Extensions
-
-extension Request: CustomStringConvertible {
-    public var description: String {
-        var string = "\n"
-        
-        string += "\nMethod    : \(method)"
-        string += "\nData      : \(data)"
-        string += "\nCookies   : \(cookies)"
-        string += "\nPath      : \(path)"
-        string += "\nHeaders   : \(headers)"
-        var bytes = body
-        let jsonData = NSData(bytes: &bytes, length: bytes.count)
-        let js = try? NSJSONSerialization
-            .JSONObjectWithData(jsonData, options: .AllowFragments)
-        string += "\nBody      : \(js)"
-        string += "\nAddress   : \(address)"
-        string += "\nParameters: \(parameters)"
-        string += "\nSession   : \(session)"
-        
-        return string + "\n"
-    }
-}
