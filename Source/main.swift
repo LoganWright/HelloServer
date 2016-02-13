@@ -9,7 +9,7 @@
 import Foundation
 import Vapor
 
-Route.get("/complex") { request in
+Route.get("complex") { request in
     print("Making request: \(request)")
     let json = [
         "root" : [
@@ -20,7 +20,7 @@ Route.get("/complex") { request in
     return try Response(status: .OK, json: json)
 }
 
-Route.get("/hello") { request in
+Route.get("hello") { request in
     return ["Hello" : "World"]
 }
 
