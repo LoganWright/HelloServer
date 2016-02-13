@@ -44,7 +44,8 @@ Route.get("test") { request in
     print("Request: \(request)")
     let json = [
         "hello",
-        "array"
+        "array",
+        "sup"
     ]
     return try Response(status: .OK, json: json)
 }
