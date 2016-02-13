@@ -17,6 +17,10 @@ Route.get("/") { request in
     return try Response(status: Response.Status.OK, json: json)
 }
 
+Route.get("/hello") { request in
+    return ["Hello" : "World"]
+}
+
 public let method: Vapor.Request.Method
 ///Query data from the path, or POST data from the body (depends on `Method`).
 public let data: [String : String]
