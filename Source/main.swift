@@ -47,7 +47,7 @@ struct Message: MappableObject {
 
 Route.post("meme") { req in
     print("\n\n ******* \n\n MEME RAN \n\n ******* \(req) ******** \n\n \n\n ******** \n\n")
-    return "Hello"
+    return "REQ: \(req)"
 }
 var messages: [Message] = []
 
