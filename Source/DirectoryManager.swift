@@ -10,12 +10,26 @@ import Foundation
 
 typealias Block = Void -> Void
 
-internal func Main(function: Block) {
-    dispatch_async(dispatch_get_main_queue(), function)
+public protocol Writeable {
+    func writeToFile(file: String, atomically: Bool) -> Bool
+    static func fromFile(file: String) -> Self?
 }
 
-internal func Background(function: Block) {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), function)
+extension String: Writeable {
+    public func writeToFile(file: String, atomically: Bool) -> Bool {
+        do {
+            try writeToFile(file, atomically: atomically, encoding: NSUTF8StringEncoding)
+            return true
+        } catch {
+            print("Error writing string to file: \(error)")
+            return false
+        }
+    }
+    
+    public static func fromFile(file: String) -> String? {
+        return try? String(contentsOfFile: file)
+    }
+
 }
 
 extension DirectoryManager {
@@ -64,19 +78,10 @@ public final class DirectoryManager {
     
     // MARK: Write
     
-    public func writeData(data: NSData, withName name: String = NSUUID().UUIDString) -> Bool {
+    public func writeData(data: Writeable, withName name: String = NSUUID().UUIDString) -> Bool {
         let filePath = directoryUrl.URLByAppendingPathComponent(name)
         guard let path = filePath.path else { return false }
         return data.writeToFile(path, atomically: true)
-    }
-    
-    public func writeDataInBackground(data: NSData, withName name: String = NSUUID().UUIDString, completion: (fileName: String, success: Bool) -> Void = { _ in }) {
-        Background {
-            let success = self.writeData(data, withName: name)
-            Main {
-                completion(fileName: name, success: success)
-            }
-        }
     }
     
     // MARK: Delete
@@ -91,10 +96,10 @@ public final class DirectoryManager {
     
     // MARK: Fetch
     
-    public func fetchFileWithName(fileName: String) -> NSData? {
+    public func fetchFileWithName<T: Writeable>(fileName: String) -> T? {
         let filePath = directoryUrl.URLByAppendingPathComponent(fileName)
         guard let path = filePath.path else { return nil }
-        return NSData(contentsOfFile: path)
+        return T.fromFile(path)
     }
 }
 

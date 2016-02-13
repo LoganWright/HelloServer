@@ -49,21 +49,15 @@ Route.post("messages") { request in
     let js = try Json.deserialize(request.body)
     let message = try Message(data: js)
     let serialized = try message.jsonRepresentation().serialize(.PrettyPrint)
-    let messageData = serialized.dataUsingEncoding(NSUTF8StringEncoding)
-    if let data = messageData {
-        directory.writeData(data)
-    }
+    directory.writeData(serialized)
     return serialized
 }
 
 Route.get("messages") { _ in
     let messages = directory
         .allFilesInDirectory
-        .flatMap { fileName in
+        .flatMap { fileName -> String? in
             return directory.fetchFileWithName(fileName)
-        }
-        .flatMap {
-            return String(data: $0, encoding: NSUTF8StringEncoding)
         }
         .joinWithSeparator(",\n")
     
