@@ -64,3 +64,6 @@ Carthage/Build
 
 fastlane/report.xml
 fastlane/screenshots
+
+# Having trouble getting databases setup, so writing manually, few
+database

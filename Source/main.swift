@@ -11,6 +11,7 @@ import Vapor
 import PureJsonSerializer
 import Genome
 
+let directory = DirectoryManager(directoryName: "database")
 
 struct Message: MappableObject {
     let id: String
@@ -24,6 +25,11 @@ struct Message: MappableObject {
     }
     
     init(map: Map) throws {
+        print("Mapping json: \(map.node)")
+        let msgg = map.node["message"]
+        print("Message: \(msgg)")
+        let msg: String = try map.extract("message")
+        print("Got msg: \(msg)")
         id = NSUUID().UUIDString
         message = try map.extract("message")
         timestamp = NSDate()
@@ -41,26 +47,30 @@ struct Message: MappableObject {
 
 Route.post("messages") { request in
     let js = try Json.deserialize(request.body)
-    print("Got js: \(js)")
     let message = try Message(data: js)
-    print("Got msg: \(message)")
-    let serialized = try message.jsonRepresentation().serialize()
-    print("Serialized: \(serialized)")
+    let serialized = try message.jsonRepresentation().serialize(.PrettyPrint)
+    let messageData = serialized.dataUsingEncoding(NSUTF8StringEncoding)
+    if let data = messageData {
+        directory.writeData(data)
+    }
     return serialized
 }
 
 Route.get("messages") { _ in
-    let string = try [
-        "hi",
-        "there",
-        "another",
-        "Thing"
-        ]
-        .map(Message.init)
-        .jsonRepresentation()
-        .serialize(.PrettyPrint)
+    let messages = directory
+        .allFilesInDirectory
+        .flatMap { fileName in
+            return directory.fetchFileWithName(fileName)
+        }
+        .flatMap {
+            return String(data: $0, encoding: NSUTF8StringEncoding)
+        }
+        .joinWithSeparator(",\n")
     
-    return Response(status: .OK, text: string)
+    var str = "[\n"
+    str += messages
+    str += "\n]"
+    return Response(status: .OK, text:  str)
 }
 
 Route.get("complex") { request in
