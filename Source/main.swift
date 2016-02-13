@@ -11,8 +11,6 @@ import Vapor
 import PureJsonSerializer
 import Genome
 
-//let directory = DirectoryManager(directoryName: "database")
-
 struct Message: MappableObject {
     let id: String
     let message: String
@@ -25,11 +23,6 @@ struct Message: MappableObject {
     }
     
     init(map: Map) throws {
-        print("Mapping json: \(map.node)")
-        let msgg = map.node["message"]
-        print("Message: \(msgg)")
-        let msg: String = try map.extract("message")
-        print("Got msg: \(msg)")
         id = NSUUID().UUIDString
         message = try map.extract("message")
         timestamp = NSDate()
@@ -39,36 +32,10 @@ struct Message: MappableObject {
         try id ~> map["id"]
         try message ~> map["message"]
         try timestamp ~> map["timestamp"]
-            .transformToNode { date in
-                return date.timeIntervalSince1970
-        }
+            .transformToNode { $0.timeIntervalSince1970 }
     }
 }
 
-let TopToken = "-top"
-let BottomToken = "-bottom"
-
-
-Route.get("meme") { req in
-    print("\n\n ******* \n\n MEME RAN \n\n ******* \(req) ******** \n\n \n\n ******** \n\n")
-    var url = "http://urlme.me/"
-    url += req.data["text"]?
-        .characters
-        .split { $0 == "+" }
-        .flatMap { String($0) }
-        .split { cmd in [TopToken, BottomToken].contains(cmd) }
-        .map { comps in return comps.joinWithSeparator("%20") }
-        .joinWithSeparator("/") ?? "success/sent%20a%20bad%20command/still%20got%20response"
- 
-    let js: Json = [
-        "response_type" : "in_channel",
-        "text" : "Here ya go!",
-        "attachments" : [
-            "text" : Json(url)
-        ]
-    ]
-    return Response(status: .OK, text: js.serialize(.PrettyPrint))
-}
 var messages: [Message] = []
 
 Route.post("messages") { request in
@@ -80,61 +47,19 @@ Route.post("messages") { request in
 }
 
 Route.get("messages") { _ in
-//    let messages = directory
-//        .allFilesInDirectory
-//        .flatMap { fileName -> String? in
-//            return directory.fetchFileWithName(fileName)
-//        }
-//        .joinWithSeparator(",\n")
-//    
-//    var str = "[\n"
-//    str += messages
-//    str += "\n]"
-    return Response(status: .OK, text: try messages.jsonRepresentation().serialize(.PrettyPrint))
+    let messagesString = try messages.jsonRepresentation().serialize(.PrettyPrint)
+    return Response(status: .OK, text: messagesString)
 }
 
-Route.get("complex") { request in
-    print("Making request: \(request)")
-    let json: Json = [
-        "root" : [
-            ["hello" : "world"],
-            ["hello" : "mars"]
-        ]
-    ]
-    print("Sending Json: \(json)")
-    return Response(status: .OK, text: json.serialize())
+Route.get("hello/:name") { request in
+    let name = request.parameters["name"] ?? "World"
+    return ["Hello" : name]
 }
 
-Route.get("local-array") { _ in
-    let thing: [String : [String : Any]] = [
-        "one" : [
-            "hi" : "there"
-        ],
-        "two" : [
-            "hi" : "again",
-            "bye" : "sup"
-        ]
-    ]
-    
-    return thing
-}
+let server = Server()
+server.run(port: 8080)
 
-Route.get("hello") { request in
-    return ["Hello" : "World"]
-}
-
-Route.get("test/:id") { request in
-    return ["Params" : "\(request.parameters)"]
-}
-
-Route.post("test") { request in
-    print("Request: \(request)")
-    let json = [
-        "hello",
-        "array"
-    ]
-    return try Response(status: .OK, json: json)
-}
+// MARK: Request Extensions
 
 extension Request: CustomStringConvertible {
     public var description: String {
@@ -157,6 +82,3 @@ extension Request: CustomStringConvertible {
         return string + "\n"
     }
 }
-
-let server = Server()
-server.run(port: 8080)
