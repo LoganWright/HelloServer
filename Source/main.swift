@@ -11,6 +11,7 @@ import Vapor
 import PureJsonSerializer
 import Genome
 
+
 struct Message: MappableObject {
     let id: String
     let message: String
