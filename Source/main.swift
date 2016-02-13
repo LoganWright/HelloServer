@@ -11,10 +11,10 @@ import Vapor
 
 Route.get("/complex") { request in
     let json = [
-        [ "hello" : "world" ],
-        [ "hello" : "mars" ]
+        ["hello" : "world"],
+        ["hello" : "mars"]
     ]
-    return try Response(status: Response.Status.OK, json: json)
+    return try Response(status: .OK, json: json)
 }
 
 Route.get("/hello") { request in
@@ -27,7 +27,7 @@ Route.get("test") { request in
         "hello",
         "array"
     ]
-    return try Response(status: Response.Status.OK, json: json)
+    return try Response(status: .OK, json: json)
 }
 
 Route.post("test") { request in
@@ -36,7 +36,7 @@ Route.post("test") { request in
         "hello",
         "array"
     ]
-    return try Response(status: Response.Status.OK, json: json)
+    return try Response(status: .OK, json: json)
 }
 
 extension Request: CustomStringConvertible {
