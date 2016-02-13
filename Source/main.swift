@@ -11,12 +11,13 @@ import Vapor
 
 Route.get("complex") { request in
     print("Making request: \(request)")
-    let json = [
+    let json: [String : Any] = [
         "root" : [
             ["hello" : "world"],
             ["hello" : "mars"]
         ]
     ]
+    print("Sending Json: \(json)")
     return try Response(status: .OK, json: json)
 }
 
