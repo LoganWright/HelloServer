@@ -21,6 +21,15 @@ Route.get("/hello") { request in
     return ["Hello" : "World"]
 }
 
+Route.get("test") { request in
+    print("Request: \(request)")
+    let json = [
+        "hello",
+        "array"
+    ]
+    return try Response(status: Response.Status.OK, json: json)
+}
+
 Route.post("test") { request in
     print("Request: \(request)")
     let json = [
