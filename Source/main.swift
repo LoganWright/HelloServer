@@ -51,6 +51,10 @@ Route.get("messages") { _ in
     return Response(status: .OK, text: messagesString)
 }
 
+Route.get("hello") { _ in
+    return ["Hello" : "World"]
+}
+
 Route.get("hello/:name") { request in
     let name = request.parameters["name"] ?? "World"
     return ["Hello" : name]
