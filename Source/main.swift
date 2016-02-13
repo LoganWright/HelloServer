@@ -49,7 +49,7 @@ let TopToken = "-top"
 let BottomToken = "-bottom"
 
 
-Route.post("meme") { req in
+Route.get("meme") { req in
     print("\n\n ******* \n\n MEME RAN \n\n ******* \(req) ******** \n\n \n\n ******** \n\n")
     var url = "http://urlme.me/"
     url += req.data["text"]?
