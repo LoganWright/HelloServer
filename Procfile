@@ -1,1 +1,1 @@
-web: swift build --workers 3 --bind 0.0.0.0:$PORT
+web: HelloSwift --port=$PORT
