@@ -10,11 +10,15 @@ import Foundation
 import Vapor
 
 Route.get("/complex") { request in
+    print("Making request: \(request)")
     let json = [
         ["hello" : "world"],
         ["hello" : "mars"]
     ]
-    return try Response(status: .OK, json: json)
+    let serialized = try NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
+    print("Ready to pass Json: \(json)")
+    let string = String(data: serialized, encoding: NSUTF8StringEncoding)!
+    return Response(status: .OK, text: string)
 }
 
 Route.get("/hello") { request in
