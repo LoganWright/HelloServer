@@ -1,1 +1,1 @@
-web: HelloSwift --port=$PORT
+web: HelloSwift --port=8080
