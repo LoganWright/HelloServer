@@ -7,6 +7,11 @@
 //
 
 import Foundation
+import Vapor
 
-print("Hello, World!")
+Route.get("/") { request in
+    return ["Hello" : "World"]
+}
 
+let server = Server()
+server.run(port: 8080)

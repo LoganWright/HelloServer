@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		807EB9501C6EBD4C00BAA720 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807EB94F1C6EBD4C00BAA720 /* main.swift */; };
+		807EB9571C6EBD7800BAA720 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807EB9561C6EBD7800BAA720 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +24,7 @@
 
 /* Begin PBXFileReference section */
 		807EB94C1C6EBD4C00BAA720 /* HelloServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloServer; sourceTree = BUILT_PRODUCTS_DIR; };
-		807EB94F1C6EBD4C00BAA720 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		807EB9561C6EBD7800BAA720 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = Source/main.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 		807EB94E1C6EBD4C00BAA720 /* HelloServer */ = {
 			isa = PBXGroup;
 			children = (
-				807EB94F1C6EBD4C00BAA720 /* main.swift */,
+				807EB9561C6EBD7800BAA720 /* main.swift */,
 			);
 			path = HelloServer;
 			sourceTree = "<group>";
@@ -119,7 +119,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				807EB9501C6EBD4C00BAA720 /* main.swift in Sources */,
+				807EB9571C6EBD7800BAA720 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,14 +209,21 @@
 		807EB9541C6EBD4C00BAA720 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/.build/debug";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		807EB9551C6EBD4C00BAA720 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/.build/release";
 			};
 			name = Release;
 		};
