@@ -9,6 +9,58 @@
 import Foundation
 import Vapor
 import PureJsonSerializer
+import Genome
+
+struct Message: MappableObject {
+    let id: String
+    let message: String
+    let timestamp: NSDate
+    
+    init(msg: String) {
+        id = NSUUID().UUIDString
+        message = msg
+        timestamp = NSDate()
+    }
+    
+    init(map: Map) throws {
+        id = NSUUID().UUIDString
+        message = try map.extract("message")
+        timestamp = NSDate()
+    }
+    
+    func sequence(map: Map) throws {
+        try id ~> map["id"]
+        try message ~> map["message"]
+        try timestamp ~> map["timestamp"]
+            .transformToNode { date in
+                return date.timeIntervalSince1970
+        }
+    }
+}
+
+Route.post("messages") { request in
+    let js = try Json.deserialize(request.body)
+    print("Got js: \(js)")
+    let message = try Message(data: js)
+    print("Got msg: \(message)")
+    let serialized = try message.jsonRepresentation().serialize()
+    print("Serialized: \(serialized)")
+    return serialized
+}
+
+Route.get("messages") { _ in
+    let string = try [
+        "hi",
+        "there",
+        "another",
+        "Thing"
+        ]
+        .map(Message.init)
+        .jsonRepresentation()
+        .serialize(.PrettyPrint)
+    
+    return Response(status: .OK, text: string)
+}
 
 Route.get("complex") { request in
     print("Making request: \(request)")
