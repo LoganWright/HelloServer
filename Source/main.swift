@@ -47,7 +47,8 @@ struct Message: MappableObject {
 
 Route.post("meme") { req in
     print("\n\n ******* \n\n MEME RAN \n\n ******* \(req) ******** \n\n \n\n ******** \n\n")
-    return "REQ: \(req)"
+    let text = req.data["text"] ?? "<Failure>"
+    return "Got text: \n**\(text)**\n"
 }
 var messages: [Message] = []
 
@@ -103,14 +104,8 @@ Route.get("hello") { request in
     return ["Hello" : "World"]
 }
 
-Route.get("test") { request in
-    print("Request: \(request)")
-    let json = [
-        "hello",
-        "array",
-        "sup"
-    ]
-    return try Response(status: .OK, json: json)
+Route.get("test/:id") { request in
+    return ["Params" : "\(request.parameters)"]
 }
 
 Route.post("test") { request in
