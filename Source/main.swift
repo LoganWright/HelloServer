@@ -11,14 +11,13 @@ import Vapor
 
 Route.get("/complex") { request in
     print("Making request: \(request)")
-    let json: NSArray = [
-        ["hello" : "world"],
-        ["hello" : "mars"]
+    let json = [
+        "root" : [
+            ["hello" : "world"],
+            ["hello" : "mars"]
+        ]
     ]
-    let serialized = try NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
-    print("Ready to pass Json: \(json)")
-    let string = String(data: serialized, encoding: NSUTF8StringEncoding)!
-    return Response(status: .OK, text: string)
+    return try Response(status: .OK, json: json)
 }
 
 Route.get("/hello") { request in
