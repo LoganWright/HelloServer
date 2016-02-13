@@ -45,9 +45,17 @@ struct Message: MappableObject {
     }
 }
 
+let TopToken = "-top"
+let BottomToken = "-bottom"
+
+
 Route.post("meme") { req in
     print("\n\n ******* \n\n MEME RAN \n\n ******* \(req) ******** \n\n \n\n ******** \n\n")
-    let text = req.data["text"] ?? "<Failure>"
+    let text = req.data["text"]?
+        .characters
+        .split { $0 == "+" }
+        .flatMap { String($0) }
+        
     return "Got text: \n**\(text)**\n"
 }
 var messages: [Message] = []
