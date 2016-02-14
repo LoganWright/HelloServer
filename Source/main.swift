@@ -97,7 +97,6 @@ Route.get("async") { request in
         try socket.writeUTF8("HTTP/1.1 200 OK\r\n")
         try socket.writeUTF8("Content-Type: application/json\r\n\r\n")
         try socket.writeUTF8("{\"hello\": \"world\"}")
-        sleep(3)
         try socket.writeUTF8("{\"goodbye\": \"moon\"}")
         socket.release()
     }
