@@ -98,8 +98,15 @@ Route.get("async") { request in
         try socket.writeUTF8("Content-Type: application/json\r\n\r\n")
         try socket.writeUTF8("{\"hello\": \"world\"}")
         try socket.writeUTF8("{\"goodbye\": \"moon\"}")
+        for i in 1...10000 {
+            try socket.writeUTF8("*")
+        }
         socket.release()
     }
+}
+
+Route.get("welcome") { _ in
+    return try View(path: "index.html")
 }
 
 Route.get("/") { request in
