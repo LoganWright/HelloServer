@@ -88,5 +88,36 @@ Route.get("hello/:name") { request in
     return ["Hello" : name]
 }
 
+Route.get("test") { req in
+    return Response(status: .OK, text: "\(req)")
+}
+
+Route.get("async") { request in
+    return AsyncResponse() { socket in
+        try socket.writeUTF8("HTTP/1.1 200 OK\r\n")
+        try socket.writeUTF8("Content-Type: application/json\r\n\r\n")
+        try socket.writeUTF8("{\"hello\": \"world\"}")
+        sleep(3)
+        try socket.writeUTF8("{\"goodbye\": \"moon\"}")
+        socket.release()
+    }
+}
+
+Route.get("/") { request in
+    let json: Json = [
+        "Hello" : "Server Side Swift",
+        "Featured Libraries" : [
+            "Genome" : "https://github.com/loganwright/genome",
+            "PureJsonSerializer" : "https://github.com/gfx/Swift-PureJsonSerializer",
+            "Vapor" : "https://github.com/tannernelson/vapor"
+        ],
+        "BuildPack" : "https://github.com/kylef/heroku-buildpack-swift",
+        "Hosted On" : "Heroku"
+    ]
+    
+    let resp = json.serialize(.PrettyPrint)
+    return Response(status: .OK, text: resp)
+}
+
 let server = Server()
 server.run(port: 8080)
