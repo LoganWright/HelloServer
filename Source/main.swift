@@ -13,6 +13,15 @@ import Genome
 
 // MARK: Request Extensions
 
+extension Request {
+    public var jsonBod: AnyObject? {
+        var bytes = body
+        let data = NSData(bytes: &bytes, length: body.count)
+        return try? NSJSONSerialization
+            .JSONObjectWithData(data, options: .AllowFragments)
+    }
+}
+
 extension Request: CustomStringConvertible {
     public var jsonBody: Json? {
         return try? Json.deserialize(body)
@@ -69,6 +78,8 @@ Route.post("messages") { request in
         .jsonRepresentation()
         .serialize(.PrettyPrint)
     messages.append(message)
+    
+    print("Got req: \(request.jsonBod)")
     return serialized
 }
 
