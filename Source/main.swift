@@ -10,7 +10,16 @@ import Foundation
 import Vapor
 import PureJsonSerializer
 import Genome
+import swiftra
 
+get("/hello") { req in
+    return "Hello, World!"
+}
+
+serve(8080)
+
+/*
+ 
 // MARK: Request Extensions
 
 extension Request {
@@ -153,3 +162,4 @@ class MyMiddleware: Middleware {
 let server = Server()
 server.middleware.append(MyMiddleware())
 server.run(port: 8080)
+*/
