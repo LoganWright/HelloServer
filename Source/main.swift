@@ -16,6 +16,10 @@ get { req in
     return Json(["Hello" : "World"]).serialize(.PrettyPrint)
 }
 
+get("/hello") { _ in
+    return Json(["Hello" : "World"]).serialize(.PrettyPrint)
+}
+
 /*
  
 // MARK: Request Extensions
