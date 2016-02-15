@@ -7,25 +7,15 @@
 //
 
 import Foundation
-import Vapor
+//import Vapor
 import PureJsonSerializer
 import Genome
 
-import Blackfish
+import Swifter
 
-let app = Blackfish()
-
-app.get("/") { req, res in
-    res.send(text: "Hello")
-}
-
-app.listen(port: 3000) { error in
-    if let err = error {
-        print("Failed to open port")
-    } else {
-        print("now serving: \(app)")
-    }
-}
+let server = HttpServer()
+server["/hello"] = { _ in HttpResponse.OK(HttpResponseBody.Text("Hiya")) }
+try server.start(8080)
 
 // MARK: Request Extensions
 
