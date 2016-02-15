@@ -14,7 +14,7 @@ import Genome
 // MARK: Request Extensions
 
 extension Request {
-    public var jsonBod: AnyObject? {
+    public var jsonBod: Any? {
         var bytes = body
         let data = NSData(bytes: &bytes, length: body.count)
         return try? NSJSONSerialization
