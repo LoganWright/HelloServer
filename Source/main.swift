@@ -10,13 +10,11 @@ import Foundation
 import Vapor
 import PureJsonSerializer
 import Genome
-import swiftra
+import Frank
 
-get("/hello") { req in
-    return "Hello, World!"
+get { req in
+    return Json(["Hello" : "World"]).serialize(.PrettyPrint)
 }
-
-serve(8080)
 
 /*
  
