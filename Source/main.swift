@@ -12,14 +12,19 @@ import PureJsonSerializer
 import Genome
 import Frank
 
+import Nest
+import Commander
+import Inquiline
+
 get { req in
     return Json(["Hello" : "World"]).serialize(.PrettyPrint)
 }
 
-get("/hello") { _ in
+get("hello") { _ in
     return Json(["Hello" : "World"]).serialize(.PrettyPrint)
 }
 
+//Address.IP(hostname: "0.0.0.0", port: 8000)
 /*
  
 // MARK: Request Extensions
