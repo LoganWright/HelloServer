@@ -15,9 +15,11 @@ public final class Request: RequestType {
     public let method: String
     public let path: String
     public let headers: [Nest.Header]
-    public let body: [UInt8]?
+    public let body: PayloadType?
     
     public internal(set) var arguments: [String : String] = [:]
+    
+    public let bytes: [UInt8]
     
     internal init(method: String,
          path: String,
@@ -26,14 +28,24 @@ public final class Request: RequestType {
         self.method = method
         self.path = path
         self.headers = headers
-        self.body = body
+        let bytes = body ?? []
+        self.bytes = bytes
+        self.body = Stream(bytes)
     }
     
     internal init(request: RequestType) {
         method = request.method
         path = request.path
         headers = request.headers
-        body = request.body
+        
+        var collection: [Byte] = []
+        var mutable = request.body
+        while let next = mutable?.next() {
+            collection.append(next)
+        }
+        
+        bytes = collection
+        body = Stream(collection)
     }
 }
 
@@ -56,9 +68,9 @@ extension Request: CustomStringConvertible {
         
         if let json = json {
             description += "\n Body: \(json.serialize(.PrettyPrint))"
-        } else if let body = body {
-            var bytes = body
-            let data = NSData(bytes: &bytes, length: bytes.count)
+        } else if !bytes.isEmpty {
+            var mutable = bytes
+            let data = NSData(bytes: &mutable, length: mutable.count)
             let str = String(data: data, encoding: NSUTF8StringEncoding)
             description += "\n Body:\n    \(str)"
         }
@@ -73,7 +85,7 @@ import PureJsonSerializer
 
 extension Request {
     public var json: Json? {
-        guard let body = body else { return nil }
-        return try? Json.deserialize(body)
+        guard !bytes.isEmpty else { return nil }
+        return try? Json.deserialize(bytes)
     }
 }
