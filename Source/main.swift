@@ -14,7 +14,7 @@ import Curassow
 import Inquiline
 import Nest
 
-let FourOhFour = Response(.Ok, contentType: "text/plain", body: "404 Not Found")
+let FourOhFour = Response(.Ok, contentType: "text/plain", content: "404 Not Found")
 
 Routes.add(.GET, path: "/") { request in
     let json: Json = [
@@ -31,7 +31,7 @@ Routes.add(.GET, path: "/") { request in
     ]
     
     let resp = json.serialize(.PrettyPrint)
-    return Response(.Ok, contentType: "application/json", body: resp)
+    return Response(.Ok, contentType: "application/json", content: resp)
 }
 
 Routes.add(.GET, path: "/resource/:type/:name") { req in
@@ -47,7 +47,7 @@ Routes.add(.GET, path: "/resource/:type/:name") { req in
 }
 
 Routes.add(.GET, path: "/hello") { request in
-    return Response(.Ok, contentType: "text/plain", body: "Hello, World!\n\n\(request)")
+    return Response(.Ok, contentType: "text/plain", content: "Hello, World!\n\n\(request)")
 }
 
 // MARK: In memory for now
@@ -68,7 +68,7 @@ func helloHandler(request: Request) -> ResponseType {
         "hello" : Json(name),
         "meet" : names
     ]
-    return Response(.Ok, contentType: "application/json", body: js.serialize(.PrettyPrint))
+    return Response(.Ok, contentType: "application/json", content: js.serialize(.PrettyPrint))
 }
 
 Routes.add(.GET, path: "/hello/:name", handler: helloHandler)

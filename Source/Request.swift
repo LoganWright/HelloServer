@@ -11,6 +11,8 @@ import Inquiline
 import Nest
 import Foundation
 
+public typealias Byte = Int8
+
 public final class Request: RequestType {
     public let method: String
     public let path: String
@@ -19,18 +21,18 @@ public final class Request: RequestType {
     
     public internal(set) var arguments: [String : String] = [:]
     
-    public let bytes: [UInt8]
+    public let bytes: [Byte]
     
     internal init(method: String,
          path: String,
          headers: [Nest.Header],
-         body: [UInt8]?) {
+         body: [Byte]?) {
         self.method = method
         self.path = path
         self.headers = headers
         let bytes = body ?? []
         self.bytes = bytes
-        self.body = Stream(bytes)
+        self.body = BytesPayload(bytes: bytes)
     }
     
     internal init(request: RequestType) {
@@ -45,7 +47,7 @@ public final class Request: RequestType {
         }
         
         bytes = collection
-        body = Stream(collection)
+        body = BytesPayload(bytes: collection)
     }
 }
 
@@ -86,6 +88,6 @@ import PureJsonSerializer
 extension Request {
     public var json: Json? {
         guard !bytes.isEmpty else { return nil }
-        return try? Json.deserialize(bytes)
+        return try? Json.deserialize(bytes.map { UInt8($0) })
     }
 }

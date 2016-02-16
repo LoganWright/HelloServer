@@ -23,7 +23,7 @@ public final class ResourceResponse: ResponseType {
     public var headers: [Header]
     public let body: PayloadType?
     
-    public let bytes: [UInt8]
+    public let bytes: [Byte]
     
     public init?(status: Status, fileName: String, type: String) {
         let file = "\(resourcesDirectory)\(fileName)"
@@ -38,6 +38,6 @@ public final class ResourceResponse: ResponseType {
         data.getBytes(&bytes, length: bytes.count)
         self.bytes = bytes
         
-        self.body = Stream(bytes)
+        self.body = BytesPayload(bytes: bytes)
     }
 }
