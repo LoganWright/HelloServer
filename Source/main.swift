@@ -7,22 +7,23 @@
 //
 
 import Foundation
-//import Vapor
+import Vapor
 import PureJsonSerializer
 import Genome
-import Curassow
-import Inquiline
-import Nest
 
-import Swifter
+print("SwiftServerIO -- starting")
 
-let server = HttpServer()
-server["/blah"] = { _ in print("Ran"); return HttpResponse.Accepted }
-server["/home/:path"] = HttpHandlers.directoryBrowser("~/")
-server["/dumb"] = { _ in HttpResponse.OK(HttpResponseBody.Text("Hello")) }
-try server.start(8000)
+Route.get("hello") { _ in
+    return ["Hello" : "World"]
+}
 
-NSRunLoop.mainRunLoop().run()
+Route.get("hello/:name") { request in
+    let name = request.parameters["name"] ?? "World"
+    return ["Hello" : name]
+}
+
+let server = Server()
+server.run(port: 8080)
 
 
 //
