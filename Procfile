@@ -1,1 +1,1 @@
-web: HelloServer --bind 0.0.0.0:$PORT
+web: HelloServer --port=$PORT
