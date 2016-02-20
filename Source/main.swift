@@ -8,18 +8,74 @@
 
 import Foundation
 import Vapor
-import PureJsonSerializer
-import Genome
+//import PureJsonSerializer
+//import Genome
 
 print("SwiftServerIO -- starting")
 
 Route.get("hello") { _ in
-    return ["Hello" : "World"]
+    return try Json(["Hello" : "World"])
 }
 
 Route.get("hello/:name") { request in
     let name = request.parameters["name"] ?? "World"
-    return ["Hello" : name]
+    return Json(["Hello" : Json(name)])
+}
+
+Route.get("complex-json-test") { req in
+    let thing: [String : [String : Any]] = [
+        "one" : [
+            "hi" : "there"
+        ],
+        "two" : [
+            "hi" : "again",
+            "bye" : "sup"
+        ]
+    ]
+    
+    return try Response(status: .OK, json: thing)
+}
+
+Route.post("test") { request in
+    var logs: [String : String] = [:]
+//    print("0")
+//    var bytes = request.data
+//    let data = NSData(bytes: &bytes, length: bytes.count)
+//    print("0.1")
+//    let ns = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+//    print("0.1")
+//    logs["nsraw"] = "\(ns)"
+//    print("1")
+//    
+//    // Wouldn't allow this syntax
+//    // let string = ns["test"]?["string"] as? String
+//    var value = "none"
+//    let testObject = ns["test"]
+//    let nsstring = testObject??["string"] as? String
+//    logs["nsstring"] = nsstring ?? "no"
+//    let nsnumber = testObject??["number"] as? Int
+//    logs["nsnumber"] = "\(nsnumber ?? -1)"
+//    let nsdouble = testObject??["double"] as? Double
+//    logs["nsdouble"] = "\(nsdouble ?? -1.0)"
+//    let nsarr = testObject??["nest"] as? [Int] ?? []
+//    logs["nsarr"] = "\(nsarr)"
+//    
+//    print("two")
+    
+    let json = try Json.deserialize(request.body)
+    logs["jsraw"] = "\(json)"
+    
+    let jsob = json["test"]
+    let string = jsob?["string"]?.stringValue
+    logs["jsstring"] = string ?? ""
+    let number = jsob?["number"]?.intValue
+    logs["jsnumber"] = "\(number ?? -1)"
+    let double = jsob?["double"]?.doubleValue
+    logs["jsdouble"] = "\(double ?? -1)"
+    let arr = jsob?["nest"]?.arrayValue?.flatMap { $0.intValue } ?? []
+    logs["jsarr"] = "\(arr)"
+    
+    return try Json(logs)
 }
 
 let server = Server()
