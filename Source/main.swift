@@ -38,29 +38,6 @@ Route.get("complex-json-test") { req in
 
 Route.post("test") { request in
     var logs: [String : String] = [:]
-//    print("0")
-//    var bytes = request.data
-//    let data = NSData(bytes: &bytes, length: bytes.count)
-//    print("0.1")
-//    let ns = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-//    print("0.1")
-//    logs["nsraw"] = "\(ns)"
-//    print("1")
-//    
-//    // Wouldn't allow this syntax
-//    // let string = ns["test"]?["string"] as? String
-//    var value = "none"
-//    let testObject = ns["test"]
-//    let nsstring = testObject??["string"] as? String
-//    logs["nsstring"] = nsstring ?? "no"
-//    let nsnumber = testObject??["number"] as? Int
-//    logs["nsnumber"] = "\(nsnumber ?? -1)"
-//    let nsdouble = testObject??["double"] as? Double
-//    logs["nsdouble"] = "\(nsdouble ?? -1.0)"
-//    let nsarr = testObject??["nest"] as? [Int] ?? []
-//    logs["nsarr"] = "\(nsarr)"
-//    
-//    print("two")
     
     let json = try Json.deserialize(request.body)
     logs["jsraw"] = "\(json)"
