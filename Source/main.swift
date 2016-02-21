@@ -14,7 +14,8 @@ import Vapor
 print("SwiftServerIO -- starting")
 
 Route.get("hello") { _ in
-    return try Json(["Hello" : "World"])
+    return "Hi there".stringByReplacingOccurrencesOfString("there", withString: "Logan")
+//    return try Json(["Hello" : "World"])
 }
 
 Route.get("hello/:name") { request in
