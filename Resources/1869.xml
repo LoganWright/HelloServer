@@ -1,0 +1,28 @@
+<INDEX REVISION="01.00.00">
+  <!-- BOSEbuild -->
+  <DEVICE ID="0x1869" PRODUCTNAME="BOSEbuild" UPDATER_TIMEOUT="900000" ESTIMATED_UPDATE_TIME="12">
+    <HARDWARE REVISION="01.00.00">
+      <RELEASE REVISION="0.1.3.307" HTTPHOST="bose-downloads-test.s3.amazonaws.com" URLPATH="/bosebuild/BB1/" LANGUAGES="en-us">
+        <IMAGE SUBID="0" LENGTH="1644020" CRC="0XFFFFFFFF" otaCRC="3202208898" FILENAME="BB1_0.1.3.307_stack_plus_app.dfu" NOFORCE="1" REVISION="0.1.3.307"/>
+      </RELEASE>
+      <RELEASE REVISION="0.1.4.312" HTTPHOST="bose-downloads-test.s3.amazonaws.com" URLPATH="/bosebuild/BB1/" LANGUAGES="en-us">
+        <IMAGE SUBID="0" LENGTH="1644896" CRC="0XFFFFFFFF" otaCRC="903275757" FILENAME="BB1_0.1.4.312_stack_plus_app.dfu" NOFORCE="1" REVISION="0.1.4.312"/>
+      </RELEASE>
+      <RELEASE REVISION="0.1.5.328" HTTPHOST="bose-downloads-test.s3.amazonaws.com" URLPATH="/bosebuild/BB1/" LANGUAGES="en-us">
+        <IMAGE SUBID="0" LENGTH="1646448" CRC="0XFFFFFFFF" otaCRC="3264083621" FILENAME="BB1_0.1.5.328_stack_plus_app.dfu" NOFORCE="1" REVISION="0.1.5.328"/>
+      </RELEASE>
+      <RELEASE REVISION="0.2.0.379" HTTPHOST="bose-downloads-test.s3.amazonaws.com" URLPATH="/bosebuild/BB1/" LANGUAGES="en-us">
+        <IMAGE SUBID="0" LENGTH="1641342" CRC="0XFFFFFFFF" otaCRC="1477631345" FILENAME="BB1_0.2.0.379_stack_plus_app.dfu" NOFORCE="1" REVISION="0.2.0.379"/>
+      </RELEASE>
+      <RELEASE REVISION="0.2.0.394" HTTPHOST="bose-downloads-test.s3.amazonaws.com" URLPATH="/bosebuild/BB1/" LANGUAGES="en-us">
+        <IMAGE SUBID="0" LENGTH="1645910" CRC="0XFFFFFFFF" otaCRC="2374029356" FILENAME="BB1_0.2.0.394_stack_plus_app.dfu" NOFORCE="1" REVISION="0.2.0.394"/>
+      </RELEASE>
+      <RELEASE REVISION="0.2.1.398" HTTPHOST="bose-downloads-test.s3.amazonaws.com" URLPATH="/bosebuild/BB1/" LANGUAGES="en-us">
+        <IMAGE SUBID="0" LENGTH="1645986" CRC="0XFFFFFFFF" otaCRC="774597501" FILENAME="BB1_0.2.1.398_stack_plus_app.dfu" NOFORCE="1" REVISION="0.2.1.398"/>
+      </RELEASE>
+      <RELEASE REVISION="1.0.1.428" HTTPHOST="bose-downloads-test.s3.amazonaws.com" URLPATH="/bosebuild/BB1/" LANGUAGES="en-us">
+        <IMAGE SUBID="0" LENGTH="1646446" CRC="0XFFFFFFFF" otaCRC="2320363095" FILENAME="BB1_1.0.1.428_stack_plus_app.dfu" NOFORCE="1" REVISION="1.0.1.428"/>
+      </RELEASE>
+    </HARDWARE>
+  </DEVICE>
+</INDEX>

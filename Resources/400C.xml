@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<INDEX REVISION="04.00.00">
+  <DEVICE ID="0x400C" PRODUCTNAME="Bose QuietComfort 35">
+    <HARDWARE REVISION="01.00.00">
+      <RELEASE REVISION="0.5.5.262" HTTPHOST="bose-downloads-test.s3.amazonaws.com" LANGUAGES="en-us,es-mx,de,it,fr,zh-cn,nl,ja,pt-br,ru,pl" URLPATH="/ced/soundlink_headphones/">
+        <IMAGE SUBID="0" CRC="0xFFFFFFFF" FILENAME="Wolfcastle_0.5.5_stack_plus_app.dfu" LENGTH="1668910" NOFORCE="1" REVISION="0.5.5.262" />
+        <IMAGE SUBID="1" CRC="0x4011DD90" FILENAME="Wolfcastle_0.5.5_ext_signed.xuv" LENGTH="11761088" PARTITION="1" NOFORCE="0" REVISION="0.5.5.262" />
+        <IMAGE SUBID="2" CRC="0x7BF6BDE4" FILENAME="Wolfcastle_0.5.5_acorn_coeffs_signed.xuv" LENGTH="28064" PARTITION="3" NOFORCE="0" REVISION="0.5.5.262" />
+      </RELEASE>
+    </HARDWARE>
+  </DEVICE>
+</INDEX>

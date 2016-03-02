@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<INDEX REVISION="04.00.00">
+  <DEVICE ID="0x400A" PRODUCTNAME="Bose AE2 SoundLink">
+    <HARDWARE REVISION="01.00.00">
+      <RELEASE REVISION="1.0.4.404" HTTPHOST="bose-downloads.s3.amazonaws.com" LANGUAGES="en-us,es-mx,de,it,fr,zh-cn,nl,ja,pt-br,ru,pl" URLPATH="/ced/soundlink_headphones/">
+        <IMAGE SUBID="0" CRC="0xFFFFFFFF" FILENAME="Isaac_1.0.4_stack_plus_app.dfu" LENGTH="1495518" NOFORCE="1" REVISION="1.0.4.404" />
+        <IMAGE SUBID="1" CRC="0x4BAB8D2F" FILENAME="Isaac_1.0.4_ext_signed.xuv" LENGTH="11761088" NOFORCE="0" REVISION="1.0.4.404" />
+      </RELEASE>
+      <RELEASE REVISION="1.0.7.417" HTTPHOST="bose-downloads.s3.amazonaws.com" LANGUAGES="en-us,es-mx,de,it,fr,zh-cn,nl,ja,pt-br,ru,pl" URLPATH="/ced/soundlink_headphones/">
+        <IMAGE SUBID="0" CRC="0xFFFFFFFF" FILENAME="Isaac_1.0.7_stack_plus_app.dfu" LENGTH="1496158" NOFORCE="1" REVISION="1.0.7.417" />
+        <IMAGE SUBID="1" CRC="0x96083DD5" FILENAME="Isaac_1.0.7_ext_signed.xuv" LENGTH="11761088" NOFORCE="0" REVISION="1.0.7.417" />
+      </RELEASE>    	
+      <RELEASE REVISION="1.0.8.419" HTTPHOST="bose-downloads.s3.amazonaws.com" LANGUAGES="en-us,es-mx,de,it,fr,zh-cn,nl,ja,pt-br,ru,pl" URLPATH="/ced/soundlink_headphones/">
+        <IMAGE SUBID="0" CRC="0xFFFFFFFF" FILENAME="Isaac_1.0.8_stack_plus_app.dfu" LENGTH="1496130" NOFORCE="1" REVISION="1.0.8.419" />
+        <IMAGE SUBID="1" CRC="0xAA510664" FILENAME="Isaac_1.0.8_ext_signed.xuv" LENGTH="11761088" NOFORCE="0" REVISION="1.0.8.419" />
+      </RELEASE>
+      <RELEASE REVISION="1.0.9.421" HTTPHOST="bose-downloads.s3.amazonaws.com" LANGUAGES="en-us,es-mx,de,it,fr,zh-cn,nl,ja,pt-br,ru,pl" URLPATH="/ced/soundlink_headphones/">
+        <IMAGE SUBID="0" CRC="0xFFFFFFFF" FILENAME="Isaac_1.0.9_stack_plus_app.dfu" LENGTH="1495486" NOFORCE="1" REVISION="1.0.9.421" />
+        <IMAGE SUBID="1" CRC="0x94546E5C" FILENAME="Isaac_1.0.9_ext_signed.xuv" LENGTH="11761088" NOFORCE="0" REVISION="1.0.9.421" />
+      </RELEASE>  
+      <RELEASE REVISION="2.0.0.426" HTTPHOST="bose-downloads.s3.amazonaws.com" LANGUAGES="en-us,es-mx,de,it,fr,zh-cn,nl,ja,pt-br,ru,pl" URLPATH="/ced/soundlink_headphones/">
+        <IMAGE SUBID="0" CRC="0xFFFFFFFF" FILENAME="Isaac_2.0.0_stack_plus_app.dfu" LENGTH="1549932" NOFORCE="1" REVISION="2.0.0.426" />
+        <IMAGE SUBID="1" CRC="0x4EE8D8F3" FILENAME="Isaac_2.0.0_ext_signed.xuv" LENGTH="11761088" NOFORCE="0" REVISION="2.0.0.426" />
+      </RELEASE>          
+    </HARDWARE>
+  </DEVICE>
+</INDEX>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<INDEX REVISION="04.00.00">
+  <DEVICE ID="0x4006" PRODUCTNAME="Soundlink Color Speaker">
+    <HARDWARE REVISION="01.00.00">
+      <RELEASE REVISION="1.0.14.1987" HTTPHOST="bose-downloads.s3.amazonaws.com" URLPATH="/ced/soundlink_color_speaker/" LANGUAGES="en-us,es-mx,fr,de,zh-cn,ja,it,pt-br,nl,ru,pl">
+        <IMAGE SUBID="0" CRC="0xFFFFFFFF" FILENAME="Champ_1.0.14_stack_plus_app.dfu" LENGTH="1497874" NOFORCE="1" REVISION="1.0.14.1987" />
+        <IMAGE SUBID="1" CRC="0xD7067175" FILENAME="Champ_1.0.14_ext_signed.xuv" LENGTH="11353376" NOFORCE="0" REVISION="1.0.14.1987" />
+      </RELEASE>
+						<RELEASE REVISION="1.1.5.2299" HTTPHOST="bose-downloads.s3.amazonaws.com" URLPATH="/ced/soundlink_color_speaker/" LANGUAGES="en-us,es-mx,fr,de,zh-cn,ja,it,pt-br,nl,ru,pl">
+								<IMAGE SUBID="0" CRC="0xFFFFFFFF" FILENAME="Champ_1.1.5_stack_plus_app.dfu" LENGTH="1498206" NOFORCE="1" REVISION="1.1.5.2299"/>
+								<IMAGE SUBID="1" CRC="0x6D87764E" FILENAME="Champ_1.1.5_ext_signed.xuv" LENGTH="11353344" NOFORCE="0" REVISION="1.1.5.2299"/>
+						</RELEASE>      
+    </HARDWARE>
+  </DEVICE>
+</INDEX>

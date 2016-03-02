@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<INDEX REVISION="04.00.00">
+  <DEVICE ID="0x4012" PRODUCTNAME="Bose SoundSport">
+    <HARDWARE REVISION="01.00.00">
+      <RELEASE REVISION="0.4.4.141" HTTPHOST="bose-downloads-test.s3.amazonaws.com" LANGUAGES="en-us,es-mx,de,it,fr,zh-cn,nl,ja,pt-br,ru,pl" URLPATH="/ced/soundlink_headphones/">
+        <IMAGE SUBID="0" CRC="0xFFFFFFFF" FILENAME="Ice_0.4.4_stack_plus_app.dfu" LENGTH="1653020" NOFORCE="1" REVISION="0.4.4.141" />
+        <IMAGE SUBID="1" CRC="0xC1B48271" FILENAME="Ice_0.4.4_ext_signed.xuv" LENGTH="11761088" PARTITION="1" NOFORCE="0" REVISION="0.4.4.141" />
+      </RELEASE>
+    </HARDWARE>
+  </DEVICE>
+</INDEX>
