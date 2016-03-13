@@ -25,5 +25,8 @@ app.get("ota/:product-id") { request in
     return Response(status: .OK, data: resource, contentType: .Other("application/xml"))
 }
 
+app.get("test") { req in
+    return "Test Successful"
+}
 
 app.start(port: 9090)
