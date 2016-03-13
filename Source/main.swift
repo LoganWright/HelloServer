@@ -12,12 +12,6 @@ public func loadResource(name: String) -> NSData? {
     return NSData(contentsOfFile: path)
 }
 
-extension NSData: SequenceType {
-    public func generate() -> UnsafeBufferPointer<UInt8>.Generator {
-        return UnsafeBufferPointer<UInt8>(start: UnsafePointer<UInt8>(self.bytes), count: self.length).generate()
-    }
-}
-
 // MARK: Application
 
 let app = Application()
@@ -28,7 +22,7 @@ app.get("ota/:product-id") { request in
         throw up
     }
     
-    return Response(status: .OK, data: resource, contentType: .Other("xml"))
+    return Response(status: .OK, data: resource, contentType: .Other("application/xml"))
 }
 
 
