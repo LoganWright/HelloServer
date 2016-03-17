@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8065BD1F1C9A449000169519 /* libMongoKitten.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8065BD1E1C9A449000169519 /* libMongoKitten.dylib */; };
+		8065BD211C9A449300169519 /* libVapor.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8065BD201C9A449300169519 /* libVapor.dylib */; };
 		807EB9571C6EBD7800BAA720 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807EB9561C6EBD7800BAA720 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8065BD1E1C9A449000169519 /* libMongoKitten.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libMongoKitten.dylib; path = .build/debug/libMongoKitten.dylib; sourceTree = "<group>"; };
+		8065BD201C9A449300169519 /* libVapor.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libVapor.dylib; path = .build/debug/libVapor.dylib; sourceTree = "<group>"; };
 		807EB94C1C6EBD4C00BAA720 /* HelloServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		807EB9561C6EBD7800BAA720 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = Source/main.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -32,6 +36,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8065BD1F1C9A449000169519 /* libMongoKitten.dylib in Frameworks */,
+				8065BD211C9A449300169519 /* libVapor.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +47,8 @@
 		807EB9431C6EBD4C00BAA720 = {
 			isa = PBXGroup;
 			children = (
+				8065BD201C9A449300169519 /* libVapor.dylib */,
+				8065BD1E1C9A449000169519 /* libMongoKitten.dylib */,
 				807EB94E1C6EBD4C00BAA720 /* HelloServer */,
 				807EB94D1C6EBD4C00BAA720 /* Products */,
 			);
@@ -211,6 +219,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/.build/debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/.build/debug";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -222,6 +234,10 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/.build/debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/.build/release";
 			};
