@@ -9,14 +9,18 @@ let mongoUrl = "mongodb://heroku-one:testing@ds015859.mlab.com:15859/heroku_fdl1
 let collection: MongoKitten.Collection?
 let errorMessage: String?
 do {
-    let server = try MongoKitten.Server(host: mongoUrl)
+    let server = try MongoKitten.Server(host: "127.0.0.1")
     try server.connect()
     collection = server["heroku_fdl1swgg"]["users"]
     errorMessage = ""
 } catch {
     collection = nil
+    print(error)
     errorMessage = "ERROR: \(error)"
 }
+
+print("Err: \(errorMessage)")
+print("")
 
 // Create:
 //try collection.insert(["username": "henk", "age": 245])
@@ -47,12 +51,18 @@ public func loadResource(name: String) -> NSData? {
 // MARK: Application
 
 let app = Application()
-
+//
 app.get("query", String.self) { req, name in
     let cursor = try collection?.find("name" == name)
-    if let docData = cursor?.generate().next()?.bsonData {
-        return Response(status: .OK, data: docData, contentType: .Text)
+    let doc: Document! = nil
+    if let person = cursor?.generate().next()?["name"] {
+        print("Name: \(person)")
+        let data = person.bsonData
+        let d = NSData(bytes: data, length: data.count)
+        let s = String(data: d, encoding: NSUTF8StringEncoding) ?? "OH NO"
+        return Response(status: .OK, data: person.bsonData, contentType: .Html)
     } else {
+        try collection?.insert(["name" : name])
         return Response(status: .OK, text: "Machine Broke: \(errorMessage)")
     }
 }
