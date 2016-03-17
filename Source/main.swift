@@ -9,7 +9,7 @@ let mongoUrl = "mongodb://heroku-one:testing@ds015859.mlab.com:15859/heroku_fdl1
 let collection: MongoKitten.Collection?
 let errorMessage: String?
 do {
-    let server = try MongoKitten.Server(host: "127.0.0.1")
+    let server = try MongoKitten.Server(host: mongoUrl)
     try server.connect()
     collection = server["heroku_fdl1swgg"]["users"]
     errorMessage = ""
