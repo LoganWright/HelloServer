@@ -5,13 +5,14 @@ import BSON
 
 // MARK: Mongo
 
-let mongoUrl = "mongodb://heroku-one:testing@ds015859.mlab.com:15859/heroku_fdl1swgg"
+// Get real password, change database, and use heroku config variable https://devcenter.heroku.com/articles/mongolab
+let mongoUrl = "mongodb://heroku-one:testing@ds015859.mlab.com:15859"
 let collection: MongoKitten.Collection?
 let errorMessage: String?
 do {
     let server = try MongoKitten.Server(host: mongoUrl)
     try server.connect()
-    collection = server["heroku_fdl1swgg"]["users"]
+    collection = server["heroku_fdl1swgg"]["user"]
     errorMessage = ""
 } catch {
     collection = nil
