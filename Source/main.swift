@@ -10,7 +10,7 @@ let mongoUrl = "mongodb://test-user:test-password@ds015859.mlab.com"
 let collection: MongoKitten.Collection?
 let errorMessage: String?
 do {
-    let server = try MongoKitten.Server(host: "ds015859.mlab.com", authentication: (username: "test-user", password: "test-password"), port: 15859)
+    let server = try MongoKitten.Server(at: "ds015859.mlab.com", port: 15859, using: (username: "test-user", password: "test-password"))
     try server.connect()
     collection = server["heroku_fdl1swgg"]["hello-names"]
     errorMessage = ""
@@ -38,7 +38,17 @@ print("")
 
 // MARK: Vapor
 
-public enum Error: ErrorType {
+typealias Byte = UInt8
+extension NSData {
+    internal func arrayOfBytes() -> [Byte] {
+        let count = self.length / sizeof(Byte)
+        var bytesArray = [Byte](repeating: 0, count: count)
+        self.getBytes(&bytesArray, length:count * sizeof(Byte))
+        return bytesArray
+    }
+}
+
+public enum Error: ErrorProtocol {
     case Failure
 }
 
@@ -54,9 +64,9 @@ public func loadResource(name: String) -> NSData? {
 let app = Application()
 //
 app.get("query", String.self) { req, name in
-    let cursor = try collection?.query("name" == name)
+    let cursor = try collection?.query(matching: "name" == name)
     let doc: Document! = nil
-    if let person = cursor?.generate().next()?["name"] {
+    if let person = cursor?.makeIterator().next()?["name"] {
         print("Name: \(person)")
         let data = person.bsonData
         let d = NSData(bytes: data, length: data.count)
@@ -73,7 +83,7 @@ app.get("ota/:product-id") { request in
         throw up
     }
     
-    return Response(status: .OK, data: resource, contentType: .Other("application/xml"))
+    return Response(status: .OK, data: resource.arrayOfBytes(), contentType: .Other("application/xml"))
 }
 
 app.get("test") { req in
@@ -81,14 +91,14 @@ app.get("test") { req in
 }
 
 func insertIfNecessary(name: String) throws {
-    if let _ = try collection?.queryOne("name" == name)?["name"] {
+    if let _ = try collection?.queryOne(matching: "name" == name)?["name"] {
     } else {
         try collection?.insert(["name" : name])
     }
 }
 
 func allPeople() throws -> [String] {
-    let cursor = try collection?.query().generate()
+    let cursor = try collection?.query().makeIterator()
     var people: [String] = []
     while let data = cursor?.next()?["name"]?.bsonData {
         let d = NSData(bytes: data, length: data.count)
