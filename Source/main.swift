@@ -122,9 +122,9 @@ app.get("hello", String.self) { req, name in
         .map { name -> String in return "\t\(name),\(br)" }
         .reduce("", combine: +)
     
-    
+    print("Will insert")
     try insertIfNecessary(name)
-    
+    print("Did Insert")
     let html = "<p>" + message + peopleMsg + "</p>"
     return Response.init(status: .OK, html: html)
 }
