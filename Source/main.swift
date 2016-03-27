@@ -55,7 +55,7 @@ public enum Error: ErrorProtocol {
 let up = Error.Failure
 
 public func loadResource(name: String) -> NSData? {
-    let path = Application.workDir + "Resources" + "/\(name.uppercaseString).xml"
+    let path = Application.workDir + "Resources" + "/\(name.uppercased()).xml"
     return NSData(contentsOfFile: path)
 }
 

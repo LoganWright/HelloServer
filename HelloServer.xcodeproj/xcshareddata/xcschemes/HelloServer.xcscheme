@@ -14,20 +14,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_Genome"
-               BuildableName = "libGenome.dylib"
-               BlueprintName = "Genome"
-               ReferencedContainer = "container:HelloServer.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "______Target_Jay"
                BuildableName = "libJay.dylib"
                BlueprintName = "Jay"
@@ -225,9 +211,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "______Target_Genome"
-            BuildableName = "libGenome.dylib"
-            BlueprintName = "Genome"
+            BlueprintIdentifier = "______Target_Jay"
+            BuildableName = "libJay.dylib"
+            BlueprintName = "Jay"
             ReferencedContainer = "container:HelloServer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
