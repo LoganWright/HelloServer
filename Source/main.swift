@@ -90,6 +90,23 @@ app.get("test") { req in
     return "Test Successful"
 }
 
+app.get("json") { req in
+    return Json([
+        "dict" : [
+            "name" : "Vapor",
+            "lang" : "Swift"
+        ],
+        "number" : 123,
+        "array" : [
+            0,
+            1,
+            2,
+            3
+        ],
+        "string" : "test"
+        ])
+}
+
 func insertIfNecessary(name: String) throws {
     if let _ = try collection?.queryOne(matching: "name" == name)?["name"] {
     } else {
