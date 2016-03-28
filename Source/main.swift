@@ -101,8 +101,9 @@ func allPeople() throws -> [String] {
     let cursor = try collection?.query().makeIterator()
     var people: [String] = []
     while let data = cursor?.next()?["name"]?.bsonData {
-        let d = NSData(bytes: data, length: data.count)
-        let s = String(data: d, encoding: NSUTF8StringEncoding) ?? "OH NO"
+//        let d = NSData(bytes: data, length: data.count)
+//        let s = String(data: d, encoding: NSUTF8StringEncoding) ?? "OH NO"
+        let s = try data.string()
         people.append(s)
     }
     return people
