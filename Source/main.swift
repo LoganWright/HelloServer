@@ -55,6 +55,48 @@ public enum Error: ErrorProtocol {
 let up = Error.Failure
 
 
+
+extension Swift.Collection where Iterator.Element == UInt8 {
+    
+    public func toString() throws -> String {
+        var utf = UTF8()
+        
+        #if swift(>=3.0)
+            var gen = self.makeIterator()
+        #else
+            var gen = self.generate()
+        #endif
+        
+        var str = String()
+        
+        #if swift(>=3.0)
+            while true {
+                switch utf.decode(&gen) {
+                case .emptyInput: //we're done
+                    return str
+                case .error: //error, can't describe what however
+                    throw up
+//                    throw Error.ParseStringFromCharsFailed(Array(self))
+                case .scalarValue(let unicodeScalar):
+                    str.append(unicodeScalar)
+                }
+            }
+        #else
+            while true {
+            switch utf.decode(&gen) {
+            case .EmptyInput: //we're done
+            return str
+            case .Error: //error, can't describe what however
+            throw Error.ParseStringFromCharsFailed(Array(self))
+            case .Result(let unicodeScalar):
+            str.append(unicodeScalar)
+            }
+            }
+        #endif
+    }
+    
+}
+
 // MARK: Application
 
 let app = Application()
@@ -136,9 +178,7 @@ func allPeople() throws -> [String] {
 //        let d = NSData(bytes: data, length: data.count)
 //        let s = NSString(data: d, encoding: NSUTF8StringEncoding) ?? "OH NO"
 //        let s = try data.string()
-        if let s = String(bytes: data) {
-            people.append(s)
-        }
+        people.append(try data.toString())
     }
     return people
 }
