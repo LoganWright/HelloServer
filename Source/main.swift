@@ -109,6 +109,19 @@ app.get("json") { req in
         ])
 }
 
+extension String {
+    init?(bytes: [UInt8]) {
+        let signedData = bytes.map { byte in
+            return Int8(byte)
+        }
+        
+        guard let string = String(validatingUTF8: signedData) else {
+            return nil
+        }
+        
+        self = string
+    }
+}
 func insertIfNecessary(name: String) throws {
     if let _ = try collection?.queryOne(matching: "name" == name)?["name"] {
     } else {
@@ -120,10 +133,12 @@ func allPeople() throws -> [String] {
     let cursor = try collection?.query().makeIterator()
     var people: [String] = []
     while let data = cursor?.next()?["name"]?.bsonData {
-        let d = NSData(bytes: data, length: data.count)
-        let s = NSString(data: d, encoding: NSUTF8StringEncoding) ?? "OH NO"
+//        let d = NSData(bytes: data, length: data.count)
+//        let s = NSString(data: d, encoding: NSUTF8StringEncoding) ?? "OH NO"
 //        let s = try data.string()
-        people.append(s.description)
+        if let s = String(bytes: data) {
+            people.append(s)
+        }
     }
     return people
 }
