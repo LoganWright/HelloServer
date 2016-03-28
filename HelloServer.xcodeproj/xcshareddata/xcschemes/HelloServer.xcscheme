@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_Jay"
-               BuildableName = "libJay.dylib"
-               BlueprintName = "Jay"
+               BlueprintIdentifier = "______Target_OperatingSystem"
+               BuildableName = "libOperatingSystem.dylib"
+               BlueprintName = "OperatingSystem"
                ReferencedContainer = "container:HelloServer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,65 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_JayExample"
-               BuildableName = "JayExample"
-               BlueprintName = "JayExample"
+               BlueprintIdentifier = "______Target_String"
+               BuildableName = "libString.dylib"
+               BlueprintName = "String"
+               ReferencedContainer = "container:HelloServer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "______Target_C7"
+               BuildableName = "libC7.dylib"
+               BlueprintName = "C7"
+               ReferencedContainer = "container:HelloServer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "______Target_Data"
+               BuildableName = "libData.dylib"
+               BlueprintName = "Data"
+               ReferencedContainer = "container:HelloServer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "______Target_InterchangeData"
+               BuildableName = "libInterchangeData.dylib"
+               BlueprintName = "InterchangeData"
+               ReferencedContainer = "container:HelloServer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "______Target_JSON"
+               BuildableName = "libJSON.dylib"
+               BlueprintName = "JSON"
                ReferencedContainer = "container:HelloServer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -70,6 +126,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "______Target_Generator"
+               BuildableName = "Generator"
+               BlueprintName = "Generator"
+               ReferencedContainer = "container:HelloServer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "______Target_libc"
                BuildableName = "liblibc.dylib"
                BlueprintName = "libc"
@@ -98,9 +168,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_BSON"
-               BuildableName = "libBSON.dylib"
-               BlueprintName = "BSON"
+               BlueprintIdentifier = "______Target_VaporDev"
+               BuildableName = "VaporDev"
+               BlueprintName = "VaporDev"
                ReferencedContainer = "container:HelloServer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -112,9 +182,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_C7"
-               BuildableName = "libC7.dylib"
-               BlueprintName = "C7"
+               BlueprintIdentifier = "______Target_BSON"
+               BuildableName = "libBSON.dylib"
+               BlueprintName = "BSON"
                ReferencedContainer = "container:HelloServer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -154,16 +224,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_JayTestSuite"
-               BuildableName = "Jay.testsuite.xctest"
-               BlueprintName = "Jay.testsuite"
-               ReferencedContainer = "container:HelloServer.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
@@ -211,9 +271,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "______Target_Jay"
-            BuildableName = "libJay.dylib"
-            BlueprintName = "Jay"
+            BlueprintIdentifier = "______Target_OperatingSystem"
+            BuildableName = "libOperatingSystem.dylib"
+            BlueprintName = "OperatingSystem"
             ReferencedContainer = "container:HelloServer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

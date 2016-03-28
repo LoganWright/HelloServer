@@ -54,14 +54,16 @@ public enum Error: ErrorProtocol {
 
 let up = Error.Failure
 
-public func loadResource(name: String) -> NSData? {
-    let path = Application.workDir + "Resources" + "/\(name.uppercased()).xml"
-    return NSData(contentsOfFile: path)
-}
 
 // MARK: Application
 
 let app = Application()
+
+public func loadResource(name: String) -> NSData? {
+    let path = app.workDir + "Resources" + "/\(name.uppercased()).xml"
+    return NSData(contentsOfFile: path)
+}
+
 //
 app.get("query", String.self) { req, name in
     let cursor = try collection?.query(matching: "name" == name)
@@ -73,7 +75,7 @@ app.get("query", String.self) { req, name in
         let s = String(data: d, encoding: NSUTF8StringEncoding) ?? "OH NO"
         return Response(status: .OK, data: "You found: \(s)".utf8, contentType: .Html)
     } else {
-        try collection?.insert(["name" : name])
+        let _ = try collection?.insert(["name" : name])
         return Response(status: .OK, text: "Machine Broke: \(errorMessage)")
     }
 }
@@ -110,7 +112,7 @@ app.get("json") { req in
 func insertIfNecessary(name: String) throws {
     if let _ = try collection?.queryOne(matching: "name" == name)?["name"] {
     } else {
-        try collection?.insert(["name" : name])
+        let _ = try collection?.insert(["name" : name])
     }
 }
 
@@ -118,16 +120,17 @@ func allPeople() throws -> [String] {
     let cursor = try collection?.query().makeIterator()
     var people: [String] = []
     while let data = cursor?.next()?["name"]?.bsonData {
-//        let d = NSData(bytes: data, length: data.count)
-//        let s = String(data: d, encoding: NSUTF8StringEncoding) ?? "OH NO"
-        let s = try data.string()
-        people.append(s)
+        let d = NSData(bytes: data, length: data.count)
+        let s = NSString(data: d, encoding: NSUTF8StringEncoding) ?? "OH NO"
+//        let s = try data.string()
+        people.append(s.description)
     }
     return people
 }
 
 app.get("hello") { req in
-    return try Json(try allPeople())
+    let peeps = try allPeople().map { Json($0) }
+    return Json.array(peeps)
 }
 
 app.get("hello", String.self) { req, name in
